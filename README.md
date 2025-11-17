@@ -1,22 +1,24 @@
-\# Customer Churn Prediction with SHAP Explainability
+\# 📊 Customer Churn Prediction Project
 
 
 
-This project predicts customer churn using machine learning models and explains model predictions using SHAP (SHapley Additive exPlanations).  
+This project predicts customer churn using a Machine Learning pipeline built with \*\*Random Forest\*\*.  
+
+It includes:
 
 
 
-The main goals are:
+\- Data preprocessing  
 
+\- Model training  
 
+\- Model evaluation  
 
-\- Build a machine learning model to predict churn  
+\- SHAP explainability (global + local)  
 
-\- Analyze feature importance using SHAP  
+\- Business insights \& retention strategies  
 
-\- Visualize predictions and key business insights  
-
-\- Provide a clear, organized structure for deployment  
+\- Final notebook for complete reproducibility  
 
 
 
@@ -24,33 +26,55 @@ The main goals are:
 
 
 
-\## 📂 Project Structure
+\## 📁 Project Structure
 
 
 
 customer-churn-project/
 
-│── data/
+│
 
-│ └── project\_customer\_churn\_dataset.csv
+│ README.md
 
-│── notebooks/
+│ requirements.txt
 
-│ ├── churn\_analysis.ipynb
+│ Customer\_Churn\_Report\_FINAL.pdf
 
-│ └── SHAP\_analysis\_of\_customer\_churn\_prediction.ipynb
+│
 
-│── src/
+├── data/
 
-│ ├── preprocess.py
+│ project\_customer\_churn\_dataset.csv
 
-│ ├── train\_model.py
+│ X\_train.csv
 
-│ └── explain\_model.py
+│ X\_test.csv
 
-│── requirements.txt
+│ y\_train.csv
 
-│── README.md
+│ y\_test.csv
+
+│ churn\_model.pkl
+
+│ shap\_summary.png
+
+│ waterfall\_plot.png
+
+│
+
+├── notebooks/
+
+│ churn\_analysis.ipynb
+
+│
+
+└── src/
+
+preprocess.py
+
+train\_model.py
+
+explain\_model.py
 
 
 
@@ -76,7 +100,7 @@ pip install -r requirements.txt
 
 
 
-\### 2️⃣ Run preprocessing
+\### 2️⃣ Preprocess the dataset
 
 
 
@@ -100,13 +124,11 @@ python src/train\_model.py
 
 
 
-\### 4️⃣ Generate SHAP explainability report
-
-
-
-
+\### 4️⃣ Generate SHAP explainability plots
 
 python src/explain\_model.py
+
+
 
 
 
@@ -120,39 +142,17 @@ python src/explain\_model.py
 
 
 
-This project generates:
+\### 🔹 Global SHAP Summary Plot  
+
+Shows most influential features affecting churn.
 
 
 
-\- Global feature importance  
-
-\- SHAP summary plot  
-
-\- SHAP force plot  
-
-\- Individual prediction explanations  
+!\[SHAP Summary](data/shap\_summary.png)
 
 
 
----
-
-
-
-\## 📌 Dataset
-
-
-
-Make sure your dataset is stored here:
-
-
-
-
-
-
-
-customer-churn-project/data/project\_customer\_churn\_dataset.csv
-
-
+\*\*File Path:\*\* `data/shap\_summary.png`
 
 
 
@@ -160,9 +160,153 @@ customer-churn-project/data/project\_customer\_churn\_dataset.csv
 
 
 
-\## ✨ Author
+\### 🔹 Local SHAP Waterfall Plot  
+
+Explains \*why\* one specific customer churned or not.
 
 
 
-Created by \*\*infantpriya73\*\*  
+!\[Waterfall Plot](data/waterfall\_plot.png)
+
+
+
+\*\*File Path:\*\* `data/waterfall\_plot.png`
+
+
+
+---
+
+
+
+\## 🧠 Key SHAP Insights
+
+
+
+\### Top 5 features influencing churn:
+
+1\. \*\*Monthly Charges\*\* – Higher billing increases churn probability.  
+
+2\. \*\*Tenure Months\*\* – New customers have significantly higher churn risk.  
+
+3\. \*\*Service Usage (GB)\*\* – Low usage strongly indicates disengagement.  
+
+4\. \*\*Service Outages\*\* – Poor reliability is a major churn factor.  
+
+5\. \*\*Support Calls (last 3 months)\*\* – Frequent complaints indicate dissatisfaction.
+
+
+
+---
+
+
+
+\## 💡 Business Recommendations
+
+
+
+\### 📍 1. High-Billing Customers
+
+\- Offer personalized discounts  
+
+\- Introduce flexible payment options  
+
+\- Provide loyalty benefits  
+
+
+
+\### 📍 2. New, Short-Tenure Customers
+
+\- Improve early onboarding  
+
+\- Offer onboarding incentives  
+
+\- Provide proactive engagement  
+
+
+
+\### 📍 3. Customers with High Complaints / Outages
+
+\- Provide priority customer service  
+
+\- Assign a support agent  
+
+\- Offer compensation during repeated outages  
+
+
+
+---
+
+
+
+\## 📤 Push Final Project to GitHub
+
+
+
+git add .
+
+git commit -m "Final submission with notebook, SHAP images, and report"
+
+git push origin main
+
+
+
+
+
+
+
+---
+
+
+
+\## 📄 Generate PDF Report
+
+
+
+This project includes an automated script that creates a final PDF report containing:
+
+
+
+\- SHAP Summary Plot  
+
+\- SHAP Waterfall Plot  
+
+\- Model explanation details  
+
+
+
+To generate the report, run:
+
+
+
+python src/generate\_pdf\_report.py
+
+
+
+
+
+The output file will be saved as:
+
+
+
+Customer\_Churn\_Report\_FINAL.pdf
+
+
+
+
+
+in the project root directory.
+
+
+
+
+
+---
+
+
+
+\## 👤 Author  
+
+\*\*Infant Mychiline Priya R\*\*
+
+
 
