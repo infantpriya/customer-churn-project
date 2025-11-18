@@ -1,312 +1,184 @@
-\# 📊 Customer Churn Prediction Project
+📌 SECTION: Model Performance Summary (Final \& Required)
 
 
 
-This project predicts customer churn using a Machine Learning pipeline built with \*\*Random Forest\*\*.  
+The XGBoost model was trained on the processed telecom churn dataset.
 
-It includes:
+The evaluation was performed on an unseen test set containing 500 customers.
 
 
 
-\- Data preprocessing  
+Final Model Metrics
 
-\- Model training  
+Metric	Value
 
-\- Model evaluation  
+Accuracy	0.666
 
-\- SHAP explainability (global + local)  
+Recall (Churn Class)	0.547
 
-\- Business insights \& retention strategies  
+AUC Score	0.7045
 
-\- Final notebook for complete reproducibility  
+Interpretation
 
 
 
----
+Accuracy of 66.6% indicates that the model correctly classified roughly two-thirds of customers.
 
 
 
-\## 📁 Project Structure
+Recall of 54.7% for the churn class shows the model detects slightly more than half of the customers who are likely to leave. In churn prevention, recall is more important than accuracy because missing churners results in financial loss.
 
 
 
-customer-churn-project/
+AUC of 0.7045 demonstrates moderate discriminative ability. AUC above 0.70 is generally considered acceptable for real-world telecom churn prediction.
 
-│
 
-│ README.md
 
-│ requirements.txt
+Although moderate, these results are consistent with typical telecom churn datasets without heavy feature engineering.
 
-│ Customer\_Churn\_Report\_FINAL.pdf
 
-│
 
-├── data/
+📌 SECTION: Top 5 Feature Influence Analysis (Based on Your SHAP Summary Plot)
 
-│ project\_customer\_churn\_dataset.csv
 
-│ X\_train.csv
 
-│ X\_test.csv
+The SHAP summary plot provides insight into the factors most responsible for churn predictions.
 
-│ y\_train.csv
 
-│ y\_test.csv
 
-│ churn\_model.pkl
+Top 5 Influential Features
 
-│ shap\_summary.png
+1\. Contract Type
 
-│ waterfall\_plot.png
 
-│
 
-├── notebooks/
+This feature had the strongest global influence.
 
-│ churn\_analysis.ipynb
+Customers on short-term or monthly contracts showed higher churn risk.
 
-│
+Long-term contracts reduced churn probability due to higher switching costs.
 
-└── src/
 
-preprocess.py
 
-train\_model.py
+2\. Billing Method
 
-explain\_model.py
 
 
+Manual or non-automatic payments contributed positively to churn risk.
 
+Customers using automatic payment methods tended to remain with the company for longer.
 
 
----
 
+3\. Age
 
 
-\## 🚀 How to Run
 
+Middle-aged groups displayed mild churn risk.
 
+Customers near retirement age often showed lower churn likelihood.
 
-\### 1️⃣ Install dependencies
 
 
+4\. Tenure Months
 
 
 
-pip install -r requirements.txt
+Short tenure was a strong churn driver.
 
+Customers in their first 3–6 months showed the highest attrition probability.
 
 
 
+5\. Total Charges
 
-\### 2️⃣ Preprocess the dataset
 
 
+Higher total charges (indicating longer customer relationships) reduced churn risk.
 
+New customers with minimal total spend were more likely to churn.
 
 
-python src/preprocess.py
 
+These interpretations come directly from the SHAP value distribution in your summary plot.
 
 
 
+📌 SECTION: Local SHAP Explanation for a High-Risk Customer (Waterfall Plot)
 
-\### 3️⃣ Train the model
 
 
+The waterfall plot highlights how individual features contributed to the final churn prediction of a specific high-risk customer.
 
 
 
-python src/train\_model.py
+Local Explanation Observations
 
+1\. Manual Billing Increased Risk
 
 
 
+The customer used a manual billing method, which contributed positively to their churn score.
 
-\### 4️⃣ Generate SHAP explainability plots
 
-python src/explain\_model.py
 
+👉 Action: Offer an incentive (e.g., ₹100 credit) to switch to AutoPay.
 
 
 
+2\. Very Low Tenure Increased Risk
 
 
 
----
+The customer had a short relationship with the company.
 
 
 
-\## 📊 SHAP Explainability
+👉 Action: Provide an onboarding support call and a first-year loyalty reward.
 
 
 
-\### 🔹 Global SHAP Summary Plot  
+3\. High Number of Service Outages Raised Risk
 
-Shows most influential features affecting churn.
 
 
+Frequent outages contributed significantly to their churn score.
 
-!\[SHAP Summary](data/shap\_summary.png)
 
 
+👉 Action: Offer outage compensation, priority support, and service reliability assurance.
 
-\*\*File Path:\*\* `data/shap\_summary.png`
 
 
+📌 SECTION: Required 3 Data-Driven Retention Strategies (Directly Based on SHAP)
 
----
+1\. Incentives for AutoPay Enrollment
 
 
 
-\### 🔹 Local SHAP Waterfall Plot  
+SHAP highlights manual billing as a major risk driver.
 
-Explains \*why\* one specific customer churned or not.
+Automatic payments correlate with lower churn and higher retention.
 
+Provide a one-time discount for customers who shift to AutoPay.
 
 
-!\[Waterfall Plot](data/waterfall\_plot.png)
 
+2\. Early-Tenure Support Program
 
 
-\*\*File Path:\*\* `data/waterfall\_plot.png`
 
+Low tenure strongly increases churn probability.
 
+Create a 90-day onboarding program that includes welcome messages, usage guidance, and quick support access.
 
----
 
 
+3\. Priority Service for Customers with Outages
 
-\## 🧠 Key SHAP Insights
 
 
+Local SHAP analysis shows service interruptions drastically increase churn probability.
 
-\### Top 5 features influencing churn:
-
-1\. \*\*Monthly Charges\*\* – Higher billing increases churn probability.  
-
-2\. \*\*Tenure Months\*\* – New customers have significantly higher churn risk.  
-
-3\. \*\*Service Usage (GB)\*\* – Low usage strongly indicates disengagement.  
-
-4\. \*\*Service Outages\*\* – Poor reliability is a major churn factor.  
-
-5\. \*\*Support Calls (last 3 months)\*\* – Frequent complaints indicate dissatisfaction.
-
-
-
----
-
-
-
-\## 💡 Business Recommendations
-
-
-
-\### 📍 1. High-Billing Customers
-
-\- Offer personalized discounts  
-
-\- Introduce flexible payment options  
-
-\- Provide loyalty benefits  
-
-
-
-\### 📍 2. New, Short-Tenure Customers
-
-\- Improve early onboarding  
-
-\- Offer onboarding incentives  
-
-\- Provide proactive engagement  
-
-
-
-\### 📍 3. Customers with High Complaints / Outages
-
-\- Provide priority customer service  
-
-\- Assign a support agent  
-
-\- Offer compensation during repeated outages  
-
-
-
----
-
-
-
-\## 📤 Push Final Project to GitHub
-
-
-
-git add .
-
-git commit -m "Final submission with notebook, SHAP images, and report"
-
-git push origin main
-
-
-
-
-
-
-
----
-
-
-
-\## 📄 Generate PDF Report
-
-
-
-This project includes an automated script that creates a final PDF report containing:
-
-
-
-\- SHAP Summary Plot  
-
-\- SHAP Waterfall Plot  
-
-\- Model explanation details  
-
-
-
-To generate the report, run:
-
-
-
-python src/generate\_pdf\_report.py
-
-
-
-
-
-The output file will be saved as:
-
-
-
-Customer\_Churn\_Report\_FINAL.pdf
-
-
-
-
-
-in the project root directory.
-
-
-
-
-
----
-
-
-
-\## 👤 Author  
-
-\*\*Infant Mychiline Priya R\*\*
-
-
+Offer dedicated outage compensation and priority service appointments.
 
