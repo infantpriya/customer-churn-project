@@ -1,184 +1,262 @@
-📌 SECTION: Model Performance Summary (Final \& Required)
+&nbsp;Customer Churn Prediction – SHAP Interpretability Project
 
 
 
-The XGBoost model was trained on the processed telecom churn dataset.
-
-The evaluation was performed on an unseen test set containing 500 customers.
 
 
+Interpretability Analysis of Customer Churn Prediction Using SHAP
 
-Final Model Metrics
 
-Metric	Value
 
-Accuracy	0.666
+This project develops a churn prediction model using Gradient Boosting (XGBoost) and applies SHAP values to interpret both global and local model behavior. The analysis includes performance evaluation, feature importance interpretation, individual customer explanations, and retention strategies derived directly from SHAP outputs.
 
-Recall (Churn Class)	0.547
 
-AUC Score	0.7045
+
+1\. Model Development and Performance Metrics
+
+
+
+An XGBoost classifier was trained on the customer churn dataset. The dataset was divided into training and testing sets. The objective was to identify customers who are at risk of leaving and understand the factors that contribute to the model decision.
+
+
+
+Model Performance Results
+
+
+
+Accuracy: 0.666
+
+
+
+Recall (Churn Class): 0.547
+
+
+
+AUC: 0.705
+
+
 
 Interpretation
 
 
 
-Accuracy of 66.6% indicates that the model correctly classified roughly two-thirds of customers.
+The model correctly detects more than half of the customers who are likely to churn.
 
 
 
-Recall of 54.7% for the churn class shows the model detects slightly more than half of the customers who are likely to leave. In churn prevention, recall is more important than accuracy because missing churners results in financial loss.
+The AUC score of approximately 0.70 indicates moderate discriminative power.
 
 
 
-AUC of 0.7045 demonstrates moderate discriminative ability. AUC above 0.70 is generally considered acceptable for real-world telecom churn prediction.
+Recall is important because retaining the at-risk group is the primary objective in churn prediction.
 
 
 
-Although moderate, these results are consistent with typical telecom churn datasets without heavy feature engineering.
+These metrics show that the model works sufficiently for interpretability and SHAP analysis.
 
 
 
-📌 SECTION: Top 5 Feature Influence Analysis (Based on Your SHAP Summary Plot)
+2\. Global Feature Importance Using SHAP Summary Plot
 
 
 
-The SHAP summary plot provides insight into the factors most responsible for churn predictions.
+SHAP values were computed for all features to understand how each one influences predictions across the entire dataset. The plot used is shap\_summary.png, saved in the data directory.
 
 
 
-Top 5 Influential Features
+Top Five Most Influential Features
 
-1\. Contract Type
 
 
+Contract Type
 
-This feature had the strongest global influence.
 
-Customers on short-term or monthly contracts showed higher churn risk.
 
-Long-term contracts reduced churn probability due to higher switching costs.
+Month-to-month customers show the highest churn risk.
 
 
 
-2\. Billing Method
+Long-term contracts reduce churn likelihood.
 
 
 
-Manual or non-automatic payments contributed positively to churn risk.
+Billing Method
 
-Customers using automatic payment methods tended to remain with the company for longer.
 
 
+Manual or paper-based billing is linked with higher churn.
 
-3\. Age
 
 
+Automatic payments are associated with more stable customers.
 
-Middle-aged groups displayed mild churn risk.
 
-Customers near retirement age often showed lower churn likelihood.
 
+Age
 
 
-4\. Tenure Months
 
+Younger customers demonstrate slightly higher churn tendencies.
 
 
-Short tenure was a strong churn driver.
 
-Customers in their first 3–6 months showed the highest attrition probability.
+Older customers tend to remain subscribed longer.
 
 
 
-5\. Total Charges
+Total Charges
 
 
 
-Higher total charges (indicating longer customer relationships) reduced churn risk.
+Customers with lower lifetime spending show higher churn probability.
 
-New customers with minimal total spend were more likely to churn.
 
 
+This often reflects limited tenure or early dissatisfaction.
 
-These interpretations come directly from the SHAP value distribution in your summary plot.
 
 
+Tenure Months
 
-📌 SECTION: Local SHAP Explanation for a High-Risk Customer (Waterfall Plot)
 
 
+Shorter tenure strongly correlates with churn.
 
-The waterfall plot highlights how individual features contributed to the final churn prediction of a specific high-risk customer.
 
 
+Longer tenure customers exhibit more stability.
 
-Local Explanation Observations
 
-1\. Manual Billing Increased Risk
 
+These insights are derived directly from the SHAP summary plot.
 
 
-The customer used a manual billing method, which contributed positively to their churn score.
 
+3\. Local SHAP Analysis Using a Waterfall Plot
 
 
-👉 Action: Offer an incentive (e.g., ₹100 credit) to switch to AutoPay.
 
+A single test customer was selected to analyze the model decision. The explanation is stored in waterfall\_plot.png.
 
 
-2\. Very Low Tenure Increased Risk
 
+Key Local Insights
 
 
-The customer had a short relationship with the company.
 
+Contract Type reduced the predicted probability of churn.
 
 
-👉 Action: Provide an onboarding support call and a first-year loyalty reward.
 
+Billing Method and Age also contributed to lowering churn risk.
 
 
-3\. High Number of Service Outages Raised Risk
 
+Service Usage and Support Call Frequency added slight upward pressure toward churn.
 
 
-Frequent outages contributed significantly to their churn score.
 
+This plot helps visualize how individual features push the prediction upward or downward for one customer.
 
 
-👉 Action: Offer outage compensation, priority support, and service reliability assurance.
 
+4\. Retention Strategies Based on SHAP Explanations
 
 
-📌 SECTION: Required 3 Data-Driven Retention Strategies (Directly Based on SHAP)
 
-1\. Incentives for AutoPay Enrollment
+All recommendations originate directly from the SHAP results and reflect the strongest predictive drivers.
 
 
 
-SHAP highlights manual billing as a major risk driver.
+Strategy 1: Improve the experience for month-to-month customers
 
-Automatic payments correlate with lower churn and higher retention.
 
-Provide a one-time discount for customers who shift to AutoPay.
 
+Since contract type is the strongest churn indicator, providing incentives for switching to longer contracts may reduce churn.
 
 
-2\. Early-Tenure Support Program
 
+Strategy 2: Encourage automatic billing adoption
 
 
-Low tenure strongly increases churn probability.
 
-Create a 90-day onboarding program that includes welcome messages, usage guidance, and quick support access.
+Manual billing is associated with higher churn risk. Encouraging customers to switch to automatic payments through discounts or credits may reduce attrition.
 
 
 
-3\. Priority Service for Customers with Outages
+Strategy 3: Strengthen early customer engagement
 
 
 
-Local SHAP analysis shows service interruptions drastically increase churn probability.
+Customers with short tenure (< six months) have the highest churn probability.
 
-Offer dedicated outage compensation and priority service appointments.
+Early onboarding programs and follow-up interactions can improve retention.
+
+
+
+5\. Comparison Between Traditional Feature Importance and SHAP
+
+
+
+Traditional feature importance reflects feature split gain but lacks directionality.
+
+
+
+SHAP explains not only which features matter but also how they influence predictions.
+
+
+
+SHAP identifies both global patterns and individual-level behavior.
+
+
+
+In this project, both methods identify similar top features, but SHAP provides clearer interpretability needed for actionable decisions.
+
+
+
+Deliverables Included
+
+
+
+All required files are included in the repository:
+
+
+
+data/shap\_summary.png
+
+
+
+data/waterfall\_plot.png
+
+
+
+src/train\_model.py
+
+
+
+src/preprocess.py
+
+
+
+src/explain\_model.py
+
+
+
+notebooks/churn\_analysis.ipynb
+
+
+
+notebooks/SHAP\_analysis\_of\_customer\_churn\_prediction.ipynb
+
+
+
+These files reproduce the results described above.
+
+
+
+Conclusion
+
+
+
+This project completes the full interpretability workflow using XGBoost and SHAP. The analysis provides global and local insights into customer behavior, along with concrete retention strategies supported by SHAP explanations. This approach helps organizations understand not only who is likely to churn but also why those predictions occur.
 
